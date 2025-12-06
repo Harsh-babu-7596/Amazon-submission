@@ -1,192 +1,214 @@
-📌 SalesDuo Amazon Listing Optimizer — Full Project Documentation
-📖 Overview
 
-SalesDuo Amazon Listing Optimizer is a full-stack AI-powered application that intelligently improves Amazon product listings for better SEO performance and conversions.
+-----
 
-Users can:
+# 🚀 SalesDuo Amazon Listing Optimizer
 
-Enter an Amazon ASIN
+SalesDuo Amazon Listing Optimizer is a full-stack, AI-powered application designed to intelligently improve Amazon product listings, resulting in better SEO perfVormance and higher conversions.
 
-Automatically fetch product details using web scraping
+This project was built to demonstrate proficiency in APIs, web scraping, AI models, databases, UI development, and deployment-ready structure, as required for the SalesDuo Intern Assignment.
 
-Optimize content using Google Gemini AI
+-----
 
-Store and view optimization history (latest 10 records)
+## 🎯 Key Features
 
-Compare content visually in a clean UI
+| Feature | Status |
+| :--- | :--- |
+| Enter ASIN & fetch product listing from Amazon | ✔ |
+| **Optimize content using Gemini AI** | ✔ |
+| Improved Title, Bullet Points, SEO Description, & Keywords | ✔ |
+| Save results to MySQL database | ✔ |
+| Global history of past **10 optimizations** | ✔ |
+| Clean **Material-UI** based interface | ✔ |
+| Loading & comprehensive error handling | ✔ |
 
-This project demonstrates experience with APIs, scraping, AI models, databases, UI development & deployment-ready structure, as required for the SalesDuo Intern Assignment.
+-----
 
-🎯 Key Features
-Feature	Status
-Enter ASIN & fetch product listing from Amazon	✔️
-Optimize content using Gemini	✔️
-Improved title, bullet points, SEO description, keywords	✔️
-Save results to MySQL database	✔️
-Global history of past 10 optimizations	✔️
-Clean Material-UI based interface	✔️
-Loading & error handling	✔️
-🛠️ Tech Stack
-Layer	Tools Used
-Frontend	React + Material UI
-Backend	Node.js + Express
-Database	MySQL + Sequelize ORM
-AI	Google Generative AI (Gemini-Pro)
-Scraping	Axios + Cheerio
-📂 Project Structure
+## 🛠 Tech Stack
+
+| Layer | Tools Used |
+| :--- | :--- |
+| **Frontend** | React + Material UI |
+| **Backend** | Node.js + Express |
+| **Database** | MySQL + Sequelize ORM |
+| **AI** | Google Generative AI (**Gemini-Pro**) |
+| **Scraping** | Axios + Cheerio |
+
+-----
+
+## 📂 Project Structure
+
+```
 salesduo-assignment/
 │
 ├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── app.js
-│   ├── package.json
-│   ├── .env
+│   ├── src/
+│   │   ├── config/     # DB and API configs
+│   │   ├── models/     # Sequelize models (e.g., Optimizations)
+│   │   ├── routes/     # API routes
+│   │   ├── services/   # Core logic (Scraping, AI generation, DB calls)
+│   │   └── app.js      # Main Express app setup
+│   ├── package.json
+│   ├── .env            # Environment variables
 │
 └── salesduo-frontend/
-    ├── src/
-    ├── public/
-    ├── package.json
+    ├── src/
+    ├── public/
+    ├── package.json
+```
 
-⚙️ Installation & Setup
-1️⃣ Clone the repository
+-----
+
+## ⚙ Installation & Setup
+
+### 1️⃣ Clone the Repository
+
+```bash
 git clone <your-repo-url>
 cd salesduo-assignment
+```
 
-2️⃣ Backend Setup
+### 2️⃣ Database Setup (MySQL)
+
+You must have **MySQL** running locally.
+
+1.  Log into your MySQL server.
+
+2.  Create the database:
+
+    ```sql
+    CREATE DATABASE salesduo;
+    ```
+
+    *Note: Tables are auto-created by Sequelize when the backend starts.*
+
+### 3️⃣ Backend Setup
+
+```bash
 cd backend
 npm install
+```
 
+**Create a `.env` file** in the `backend/` directory and populate it with your credentials:
 
-Create .env file:
-
+```ini
 PORT=5000
 DB_HOST=localhost
 DB_USER=root
-DB_PASS=YOUR_MYSQL_PASSWORD
+DB_PASS=YOUR_MYSQL_PASSWORD # <-- CHANGE THIS
 DB_NAME=salesduo
-GENAI_API_KEY=YOUR_GOOGLE_GEMINI_API_KEY
+GENAI_API_KEY=YOUR_GOOGLE_GEMINI_API_KEY # <-- CHANGE THIS
+```
 
+**Start the server:**
 
-Start server:
-
+```bash
 npm start
+```
 
+The Backend runs at: **👉 `http://localhost:5000/`**
 
-Backend runs at:
-👉 http://localhost:5000/
+### 4️⃣ Frontend Setup
 
-3️⃣ Database Setup (MySQL)
-CREATE DATABASE salesduo;
-
-
-Tables auto-created by Sequelize when backend starts.
-
-4️⃣ Frontend Setup
+```bash
 cd ../salesduo-frontend
 npm install
 npm start
+```
 
+The Frontend runs at: **👉 `http://localhost:3000/`**
 
-Frontend runs at:
-👉 http://localhost:3000/
+-----
 
-🔍 How It Works (Flow)
-Step	Description
-1️⃣ Scrape	Extract product title + bullets + description from Amazon page
-2️⃣ Optimize	Send content to Gemini AI → Get SEO-enhanced results
-3️⃣ Store	Save original + optimized content in MySQL
-4️⃣ Display	Show comparison UI + chips for keywords
-5️⃣ History	Latest 10 optimizations displayed in History tab
-🧠 AI Prompt Engineering
+## 🔍 How It Works (Flow)
+
+| Step | Description |
+| :--- | :--- |
+| **1️⃣ Scrape** | Extract product Title, Bullet Points, and Description from the Amazon product page using Cheerio. |
+| **2️⃣ Optimize** | Send the scraped content to the **Gemini-Pro AI** model via API. |
+| **3️⃣ Store** | Save the **original** and **optimized** content (including keywords) in the `Optimizations` table in MySQL. |
+| **4️⃣ Display** | Show a visual comparison of the original vs. optimized content in a clean UI with keyword chips. |
+| **5️⃣ History** | Load and display the latest 10 optimization records from the database in the History tab. |
+
+-----
+
+## 🧠 AI Prompt Engineering
+
+The core of the optimization lies in a specific, structured prompt sent to the Gemini AI model.
 
 The AI is instructed to:
-✔ Improve readability & conversion
-✔ Target relevant Amazon SEO keywords
-✔ Ensure guideline compliance
-✔ Strict JSON response format (avoid hallucination)
 
-Example prompt:
+  * ✔ Improve **readability** and **conversion rate**.
+  * ✔ Target relevant Amazon **SEO keywords**.
+  * ✔ Ensure compliance with Amazon's listing guidelines.
+  * ✔ Enforce a **Strict JSON response format** to prevent hallucination and ensure reliable parsing.
 
-Improve clarity, SEO, and readability while keeping Amazon guidelines.
-Respond ONLY in JSON with:
-optimizedTitle, optimizedBullets, optimizedDescription, keywords[]
+**Example Prompt Directive:**
 
-🗄 Database Schema
+> Improve clarity, SEO, and readability while keeping Amazon guidelines. Respond ONLY in JSON with the keys: `optimizedTitle`, `optimizedBullets`, `optimizedDescription`, `keywords[]`.
 
-Table: Optimizations
+-----
 
-Field	Type	Purpose
-id	INT (PK)	Record
-asin	VARCHAR	Amazon product
-originalTitle	TEXT	Scraped
-originalBullets	TEXT (stringified JSON)	
-originalDescription	TEXT	
-optimizedTitle	TEXT	Gemini output
-optimizedBullets	TEXT (stringified JSON)	
-optimizedDescription	TEXT	
-optimizedKeywords	TEXT (stringified JSON)	
-createdAt	DATETIME	Timestamp
+## 🗄 Database Schema
 
-We limit queries to latest 10 rows for fast UI.
+**Table: `Optimizations`**
 
-🧪 Testing ASINs
-Product	ASIN
-Lymio Jacket	B0FMDLH793
-Boat Wireless Earbuds	B07H65KP63
-🖥️ User Interface Screens (Add screenshots in your repo)
-Home Page
+The database schema is designed to store both the original scraped data and the AI-optimized results for comparison and history tracking.
 
-ASIN input
+| Field | Type | Purpose |
+| :--- | :--- | :--- |
+| `id` | INT (PK) | Primary Key record ID |
+| `asin` | VARCHAR | Amazon product identifier |
+| `originalTitle` | TEXT | Scraped original title |
+| `originalBullets` | TEXT (stringified JSON) | Scraped original bullets |
+| `originalDescription` | TEXT | Scraped original description |
+| `optimizedTitle` | TEXT | Gemini AI-generated title |
+| `optimizedBullets` | TEXT (stringified JSON) | Gemini AI-generated bullets |
+| `optimizedDescription` | TEXT | Gemini AI-generated description |
+| `optimizedKeywords` | TEXT (stringified JSON) | Keywords generated by Gemini |
+| `createdAt` | DATETIME | Timestamp of optimization |
 
-Optimize
+*Query efficiency is prioritized by limiting history retrieval to the latest 10 records.*
 
-View History
+-----
 
-Optimize View
+## 🧪 Testing ASINs
 
-Optimized listing sections
+You can use the following example ASINs for testing the scraping and optimization functionality:
 
-Chips for keywords
+| Product | ASIN |
+| :--- | :--- |
+| Example Jacket | `B0FMDLH793` |
+| Example Earbuds | `B07H65KP63` |
 
-Link to history
+-----
 
-History View
+## 🔐 Security Measures
 
-Last 10 optimized searches
+  * **Environment Variables:** All sensitive credentials (`DB_PASS`, `GENAI_API_KEY`) are stored in `.env` files and are not committed to GitHub.
+  * **SQL Injection Prevention:** The **Sequelize ORM** is used to handle database operations, automatically sanitizing inputs and preventing raw SQL injection attacks.
 
-Titles + ASIN + quick info
+-----
 
-🔐 Security Measures
+## 🚀 Future Improvements
 
-✔ .env for credentials
-✔ No API keys or passwords pushed to GitHub
-✔ Sequelize avoids raw SQL injection
+| Improvement | Value |
+| :--- | :--- |
+| Amazon product image scraping | Provides more context and visual validation in the UI. |
+| History filtering by ASIN | Enables deep analytics for power sellers. |
+| Excel/PDF export | Generates seller-ready output for easy implementation. |
+| Authentication | Allows for a multi-user system (SaaS potential). |
+| Scheduling re-optimization | Enables continuous SEO monitoring and ranking improvement. |
 
-🚀 Future Improvements (Optional)
-Improvement	Value
-Amazon product image scraping	More context in UI
-History filtering by ASIN	Deep analytics
-Excel/PDF export	Seller ready output
-Authentication	Multi-user system
-Scheduling re-optimization	Best SEO rankings
-👨‍💻 Developer
+-----
 
-Your Name
+## 👨‍💻 Developer
+
+**Your Name**
 SalesDuo Internship Applicant
-GitHub: your github link
-Email: your email here
 
-🏁 Conclusion
+  * **GitHub:** [your github link](your github link)
+  * **Email:** [your email here](mailto:your email here)
 
-This project demonstrates:
+-----
 
-✔ Full-stack development
-✔ Real-world Amazon scraping + AI optimization
-✔ Database persistence
-✔ Clean UI and user flow
-✔ Prompt design & API integration
-✔ Assignment requirements achieved
+**"Unlocking smart automation to optimize product success on Amazon 🚀"**V
