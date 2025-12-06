@@ -63,8 +63,8 @@ salesduo-assignment/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone <your-repo-url>
-cd salesduo-assignment
+https://github.com/Harsh-babu-7596/Amazon-submission.git
+cd Amazon-submission
 ```
 
 ### 2️⃣ Database Setup (MySQL)
@@ -203,12 +203,7 @@ You can use the following example ASINs for testing the scraping and optimizatio
 
 ## 👨‍💻 Developer
 
-**Your Name**
-SalesDuo Internship Applicant
-
-  * **GitHub:** [your github link](your github link)
-  * **Email:** [your email here](mailto:your email here)
-
+Harsh Vardhan Singh Bhadauriya
 -----
 
 **"Unlocking smart automation to optimize product success on Amazon 🚀"**V
